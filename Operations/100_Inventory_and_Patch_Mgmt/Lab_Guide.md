@@ -416,9 +416,7 @@ To examine AWS-RunPatchBaseline in Documents:
 1. In the **Targets** section:
    * Under **Specify targets by**, choose **Specifying a tag** to reveal the **Tags** sub-section.
    * Under **Enter a tag key**, enter `Workload`, and under **Enter a tag value**, enter `Test` and click **Add**.
-
-The remaining Run Command features enable you to:
-* Specify **Rate control**, limiting **Concurrency** to a specific number of targets or a calculated percentage of systems, or to specify an **Error threshold** by count or percentage of systems after which the command execution will end.
+1. In the **Rate control** section you can choose limiting **Concurrency** to a specific number of targets or a calculated percentage of systems, or to specify an **Error threshold** by count or percentage of systems after which the command execution will end.
 1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 >**Note**<br>Only the last 2500 characters of a command document's output are displayed in the console.
 * Specify **SNS notifications** to a specified **SNS Topic** on all events or on a specific event type for either the entire command or on a per-instance basis. This requires Amazon SNS to be preconfigured.
@@ -451,9 +449,7 @@ The remaining Run Command features enable you to:
    1. Under **Enter a tag key**, enter `Workload` and under **Enter a tag value** enter `Test`.
 1. In the **Targets** section, choose **Specify a tag** using `Workload` and `Test`.
 >**Note** You could have choosen **Manually selecting instances** and used the check box at the top of the list to select all instances displayed, or selected them individually.
-
 >**Note** there are multiple pages of instances. If manually selecting instances, individual selections must be made on each page.
-
 1. In the **Rate control** section:
    1. For **Concurrency**, ensure that **targets** is selected and specify the value as `1`.
    >**Tip**<br>Limiting concurrency will stagger the application of patches and the reboot cycle, however, to ensure that your instances are not rebooting at the same time, create separate tags to define target groups and schedule the application of patches at separate times.
