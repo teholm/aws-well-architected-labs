@@ -450,6 +450,7 @@ To examine AWS-RunPatchBaseline in Documents:
 1. In the **Targets** section, choose **Specify a tag** using `Workload` and `Test`.
 >**Note** You could have chosen **Manually selecting instances** and used the check box at the top of the list to select all instances displayed, or selected them individually.
 >**Note** there are multiple pages of instances. If manually selecting instances, individual selections must be made on each page.
+
 1. In the **Rate control** section:
    1. For **Concurrency**, ensure that **targets** is selected and specify the value as `1`.
    >**Tip**<br>Limiting concurrency will stagger the application of patches and the reboot cycle, however, to ensure that your instances are not rebooting at the same time, create separate tags to define target groups and schedule the application of patches at separate times.
