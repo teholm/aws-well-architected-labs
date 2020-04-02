@@ -291,7 +291,8 @@ _Inventory_ is accomplished through the following:
 
 
 2. Navigate to **Managed Instances** under **Instances and Nodes** in the navigation bar. An **Association Status** has been established for the inventoried instances under management.
-1. Choose one of the **Instance ID** links to go to the inventory of the instance. The Inventory tab is now populated and you can track associations and their last activity under the Associations tab.
+>**Note**<br>You may have to scroll to the right to see the status depending on your monitor resolution.
+1. Click on one of the **Instance ID** links to go to the inventory of the instance. The Inventory tab is now populated and you can track associations and their last activity under the Associations tab.
 1. Navigate to **Compliance** under **Instances & Nodes** in the navigation bar. Here you can view the overall compliance status of your managed instances in the **Compliance Summary** and the individual compliance status of systems in the **Corresponding managed instances** section below.
 
 >**Note**<br>The inventory activity can take up to 10 minutes to complete. While waiting for the inventory activity to complete, you can proceed with the next section.
@@ -330,8 +331,8 @@ Patch Manager uses **patch baselines**, which include rules for auto-approving p
 
 ### 4.1 Create a Patch Baseline
 
-1. Under **Instances and Nodes** in the **AWS Systems Manager** navigation bar, choose **Patch Manager**.
-1. Click the **View predefined patch baselines** link under the **Configure patching** button on the upper right.
+1. In the **AWS Systems Manager** under **Instances and Nodes** navigation bar, choose **Patch Manager**.
+1. Click the **View predefined patch baselines** link in the upper right (under the Configure patching button).
 1. Choose **Create patch baseline**.
 1. On the **Create patch baseline** page in the **Provide patch baseline details** section:
    1. Enter a **Name** for your custom patch baseline, such as `AmazonLinuxSecAndNonSecBaseline`.
@@ -341,7 +342,7 @@ Patch Manager uses **patch baselines**, which include rules for auto-approving p
    1. Examine the options in the lists and ensure that **Product**, **Classification**, and **Severity** have values of **All**.
    1. Leave the **Auto approval delay** at its default of **0 days**.
    1. Change the value of **Compliance reporting - optional** to **Critical**.
-   1. Choose **Add another rule**.
+   1. Choose **Add rule**.
    1. In the new rule, change the value of **Compliance reporting - optional** to **Medium**.
    1. Check the box under **Include non-security updates** to include all Amazon Linux updates when patching.
 
@@ -368,7 +369,7 @@ After you create a patch group and tag instances, you can register the patch gro
 
 ### 4.2 Assign a Patch Group
 
-1. Choose the **Baseline ID** of your newly created baseline to enter the details screen.
+1. Choose the **Baseline ID** of your newly created baseline to enter the details screen - `AmazonLinuxSecAndNonSecBaseline` if you used the name suggested previously.
 1. Choose **Actions** in the top right of the window and select **Modify patch groups**.
 1. In the **Modify patch groups** window under **Patch groups**, enter `Critical`, choose **Add**, and then choose **Close** to be returned to the **Patch Baseline** details screen.
 
@@ -391,10 +392,10 @@ All AWS provided Automation and Run Command documents can be viewed in AWS Syste
 
 To examine AWS-RunPatchBaseline in Documents:
 
-1. In the AWS Systems Manager navigation bar under **Shared Resources**, choose **Documents**.
+1. In **AWS Systems Manager** under the navigation bar **Shared Resources**, choose **Documents**.
 1. Click in the **search box**, select **Document name prefix**, and then **Equal**.
 1. Type `AWS-Run` into the text field and press _Enter_ on your keyboard to start the search.
-1. Select AWS-RunPatchBaseline and choose **View details**.
+1. Click on **AWS-RunPatchBaseline** to see the details.
 1. Review the content of each tab in the details page of the document.
 
 
@@ -405,7 +406,7 @@ To examine AWS-RunPatchBaseline in Documents:
 
 ### 4.4 Scan Your Instances with AWS-RunPatchBaseline via Run Command
 
-1. Under **Instances and Nodes** in the AWS Systems Manager navigation bar, choose **Run Command**. In the Run Command dashboard, you will see previously executed commands including the execution of AWS-RefreshAssociation, which was performed when you set up inventory.
+1. In **AWS Systems Manager** under the navigation bar **Instances and Nodes**, choose **Run Command**. In the Run Command dashboard, you will see previously executed commands including the execution of AWS-RefreshAssociation, which was performed when you set up inventory.
 1. (Optional) choose a Command ID from the list and examine the record of the command execution.
 1. Choose **Run Command** in the top right of the window.
 1. In the **Run a command** window, under **Command document**:
@@ -418,14 +419,14 @@ To examine AWS-RunPatchBaseline in Documents:
 
 The remaining Run Command features enable you to:
 * Specify **Rate control**, limiting **Concurrency** to a specific number of targets or a calculated percentage of systems, or to specify an **Error threshold** by count or percentage of systems after which the command execution will end.
-* Specify **Output options** to record the entire output to a preconfigured **S3 bucket** and optional **S3 key prefix**.
+* In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 >**Note**<br>Only the last 2500 characters of a command document's output are displayed in the console.
 * Specify **SNS notifications** to a specified **SNS Topic** on all events or on a specific event type for either the entire command or on a per-instance basis. This requires Amazon SNS to be preconfigured.
 * View the command as it would appear if executed within the AWS Command Line Interface.
 
 1. Choose **Run** to execute the command and return to its details page.
 1. Scroll down to **Targets and outputs** to view the status of the individual targets that were selected through your tag key and value pair. Refresh your page to update the status.
-1. Choose an **Instance ID** from the targets list to view the **Output** from command execution on that instance.
+1. Click on an **Instance ID** from the targets list to view the **Output** from command execution on that instance.
 1. Choose **Step 1 - Output** to view the first 2500 characters of the command output from Step 1 of the command, and choose **Step 1 - Output** again to conceal it.
 1. Choose **Step 2 - Output** to view the first 2500 characters of the command output from Step 2 of the command.  The execution step for **PatchWindows** was skipped as it did not apply to your Amazon Linux instance.
 1. Choose **Step 1 - Output** again to conceal it.
@@ -439,15 +440,15 @@ The remaining Run Command features enable you to:
 
 ### 4.6 Patch Your Instances with AWS-RunPatchBaseline via Run Command
 
-1. Under **Instances and Nodes** in the AWS Systems Manager navigation bar, choose **Run Command**.
+1. In **AWS Systems Manager** under the navigation bar **Instances and Nodes**, choose **Run Command**.
 1. Choose **Run Command** in the top right of the window.
 1. In the **Run a command** window, under **Command document**:
    1. Choose the search icon, select `Platform types`, and then choose `Linux` to display all the available commands that can be applied to Linux instances.
    1. Choose **AWS-RunPatchBaseline** in the list.
+1. In the **Command parameters** section, change the **Operation** value to **Install**.
 1. In the **Targets** section:
    1. Under **Specify targets by**, choose **Specifying a tag** to reveal the **Tags** sub-section.
    1. Under **Enter a tag key**, enter `Workload` and under **Enter a tag value** enter `Test`.
-1. In the **Command parameters** section, change the **Operation** value to **Install**.
 1. In the **Targets** section, choose **Specify a tag** using `Workload` and `Test`.
 >**Note** You could have choosen **Manually selecting instances** and used the check box at the top of the list to select all instances displayed, or selected them individually.
 
@@ -461,6 +462,7 @@ The remaining Run Command features enable you to:
 1. Refresh the page to view updated status and proceed when the execution is successful.
 
 >**Warning**<br>Remember, if any updates are installed by Patch Manager, the patched instance is rebooted.
+1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 
 ### 4.7 Review Patch Compliance After Patching
 
