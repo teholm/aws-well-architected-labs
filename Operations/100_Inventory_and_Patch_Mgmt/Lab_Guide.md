@@ -454,9 +454,9 @@ To examine AWS-RunPatchBaseline in Documents:
    1. For **Concurrency**, ensure that **targets** is selected and specify the value as `1`.
    >**Tip**<br>Limiting concurrency will stagger the application of patches and the reboot cycle, however, to ensure that your instances are not rebooting at the same time, create separate tags to define target groups and schedule the application of patches at separate times.
    2. For **Error threshold**, ensure that **error** is selected and specify the value as `1`.
+1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 1. Choose **Run** to execute the command and to go to its details page.
 1. Refresh the page to view updated status and proceed when the execution is successful.
-1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 
 >**Warning**<br>Remember, if any updates are installed by Patch Manager, the patched instance is rebooted.
 
