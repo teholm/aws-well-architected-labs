@@ -111,7 +111,7 @@ Apply the following best practices when using tags:
 
 To deploy the lab infrastructure:
 
-1. **Right-Click and download the CloudFormation script** for this lab from [/Code](https://github.com/awslabs/aws-well-architected-labs/raw/master/Operations/100_Inventory_and_Patch_Mgmt/Code/OE_Inventory_and_Patch_Mgmt.json).
+1. **Right-Click and download** the CloudFormation template for this lab from [Here](https://github.com/awslabs/aws-well-architected-labs/raw/master/Operations/100_Inventory_and_Patch_Mgmt/Code/OE_Inventory_and_Patch_Mgmt.json).
 1. Use your administrator account to access the CloudFormation console at <https://console.aws.amazon.com/cloudformation/>.
 1. Choose **Create Stack**.
 1. On the **Select Template** page, select **Upload a template file** and select `OE_Inventory_and_Patch_Mgmt.json` file you had just downloaded.
@@ -122,7 +122,7 @@ AWS [CloudFormation Designer](https://docs.aws.amazon.com/AWSCloudFormation/late
 
 5. On the **Select Template** page, next to **Specify an Amazon S3 template URL**, choose the link to **View/Edit template in Designer**.
 1. Briefly review the graphical representation of the environment we are about to create, including the template in the JSON and YAML formats. You can use this feature to convert between JSON and YAML formats.
-1. **Choose the Create Stack icon** (a cloud with an arrow) to return to the **Select Template page**.
+1. **Choose the Create Stack icon** (a cloud with an up arrow) to return to the **Select Template page**.
 1. On the **Select Template** page, choose **Next**.
 
 A CloudFormation template is a JSON or YAML formatted text file that describes your AWS infrastructure [containing both optional and required sections](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html). In the next steps, we will provide a name for our stack and parameters that will be passed into the template to help define the resources that will be implemented.
@@ -132,12 +132,12 @@ A CloudFormation template is a JSON or YAML formatted text file that describes y
    1. Leave **InstanceProfile** blank as we have not yet defined an instance profile.
    1. Leave **InstanceTypeApp** and **InstanceTypeWeb** as the default free-tier-eligible t2.micro value.
    1. Select the EC2 **KeyName** you defined earlier from the list.
-   * In a browser window, go to <https://checkip.amazonaws.com/> to get your IP. Enter your IP address in **SSHLocation** in CIDR notation (i.e., ending in /32).
+   * In a browser window, go to <https://checkip.amazonaws.com/> to get your IP. Enter your IP address in **SSHLocation** in CIDR notation (i.e., ending in /32 for example 1.2.3.4/32).
    * Define the **Workload Name** as `Test`.
    * Choose **Next**.
 1. On the **Options** page under **Tags**, define a **Key** of **Owner**, with **Value** set to the username you choose for your administrator. You may define additional keys as needed. The CloudFormation template creates all the example tags given in the discussion on tagging above.
 1. Leave all other sections unmodified. Scroll to the bottom of the page and choose **Next**.
-1. On the **Review** page, review your choices and then choose **Create**.
+1. On the **Review** page, review your choices and then choose **Create stack**.
 1. On the CloudFormation console page
     1. **Check the box next to your Stack Name** to see its details.
     1. If your **Stack Name** is not displayed, click the **refresh** button (circular arrow) in the top right until it appears.
@@ -147,9 +147,9 @@ A CloudFormation template is a JSON or YAML formatted text file that describes y
 When the **Status** of your stack displays **CREATE_COMPLETE** in the filter list, you have just created a representation of a typical lift and shift 2-tier application migrated to the cloud.
 
 13. Navigate to the [EC2 console](https://console.aws.amazon.com/ec2/) to view the deployed systems:
- 	1. Choose **Instances**.
+ 	1. Choose **Instances** from the left navigation bar.
 	1. Select a server and review the details under its **Description** and **Tag** tabs.
-	1. (Optional) choose **Security Groups** and select the Security Group whose name begins with the name of your stack. Examine the inbound rules.
+	1. (Optional) choose **Security Groups** from the left navigation bar and select the Security Group whose name begins with the name of your stack. Examine the inbound rules.
 	1. (Optional) navigate to the VPC console and examine the configuration of the VPC you just created.
 
 ## The impact of Infrastructure as Code
@@ -201,7 +201,7 @@ SSM Agent is installed by default on:
    1. In the **Choose the service that will use this role** section, scroll past the first reference to EC2 (**EC2 Allows EC2 instances to call AWS services on your behalf**) and choose **EC2** from within the field of services. This will open the **Select your use case** section further down the page.
    1. In the **Select your use case** section, choose **EC2 Role for Simple Systems Manager** to select it.
    1. Then choose **Next: Permissions**.
-1. Under **Attached permissions policy**, verify that **AmazonEC2RoleforSSM** is listed, and then choose **Next: Review**.
+1. Under **Attached permissions policy**, verify that **AmazonEC2RoleforSSM** is listed, and then choose **Next: Tags** then **Next: Review**.
 1. In the **Review** section:
    1. Enter a **Role name**, such as `ManagedInstancesRole`.
    1. Accept the default in the **Role description**.
@@ -212,7 +212,7 @@ SSM Agent is installed by default on:
    1. Under **Attach/Replace IAM Role**, select **ManagedInstancesRole** from the drop down list and choose **Apply**.
    1. After you receive confirmation of success, choose **Close**.
    1. Repeat this process, assigning **ManagedInstancesRole** to each of the 3 remaining instances.
-1. Return to the [Systems Manager console](https://console.aws.amazon.com/systems-manager/) and choose **Managed Instances** from the navigation bar. Periodically choose **Managed Instances** until your instances begin to appear in the list. Over the next couple of minutes your instances will populate into the list as managed instances.
+1. Return to the [Systems Manager console](https://console.aws.amazon.com/systems-manager/) and choose **Managed Instances** from the left navigation bar. Periodically choose **Managed Instances** until your instances begin to appear in the list. Over the next couple of minutes your instances will populate into the list as managed instances.
 
 >**Note**<br>If desired, you can use a [more restrictive permission set](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-access-user.html) to grant access to Systems Manager.
 
@@ -251,8 +251,8 @@ You can use [AWS Systems Manager Inventory](https://docs.aws.amazon.com/systems-
    1. Provide an S3 bucket name.
    1. (Optional) Provide an S3 bucket prefix.
 1. Choose **Setup Inventory** at the bottom of the page (it can take up to 10 minutes to deploy a new inventory policy to an instance).
-1. To create a new inventory policy, from **Inventory**, choose **Setup inventory**.
-1. To edit an existing policy, from **State Manager** in the left navigation menu, select the association and choose **Edit**.
+1. (Optional) If desired, create additional inventory policies, from **Inventory**, choose **Setup inventory**.
+1. (Optional) If desired, edit an existing policy, from **State Manager** in the left navigation bar, select the association and choose **Edit**.
 
 >**Note**<br>You can create multiple Inventory specifications. They will each be stored as **associations** within **Systems Manager State Manager**.
 
@@ -272,7 +272,7 @@ When you performed the **Setup Inventory** actions, you created an association i
 
 ### 3.4 Review Association Status
 
-1. Under **Actions** in the navigation bar, select **State Manager**. At this point, the **Status** may show that the inventory activity has not yet completed.
+1. Under **Instances & Nodes** in the navigation bar, select **State Manager**. At this point, the **Status** may show that the inventory activity has not yet completed.
    1. Choose the single Association id that is the result of your **Setup Inventory** action.
    1. Examine each of the available tabs of data under the **Association ID** heading.
    1. Choose **Edit**.
@@ -285,6 +285,7 @@ _Inventory_ is accomplished through the following:
    >**Important**<br>In this example there is a single target, the wildcard. The wildcard matches _all_ instances making them _all_ targets.
    * The schedule for this activity is defined under **Specify schedule** and **Specify with** to use a CRON/Rate expression on a 30 minute interval.
    * There is the option to specify **Output options**.
+   * Finally choose **Save Changes** to save the name change.
    >**Note**<br>If you change the command document, the **Parameters** section will change to be appropriate to the new command document.
 
 
