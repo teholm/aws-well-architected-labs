@@ -419,7 +419,7 @@ To examine AWS-RunPatchBaseline in Documents:
 
 The remaining Run Command features enable you to:
 * Specify **Rate control**, limiting **Concurrency** to a specific number of targets or a calculated percentage of systems, or to specify an **Error threshold** by count or percentage of systems after which the command execution will end.
-* In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
+1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 >**Note**<br>Only the last 2500 characters of a command document's output are displayed in the console.
 * Specify **SNS notifications** to a specified **SNS Topic** on all events or on a specific event type for either the entire command or on a per-instance basis. This requires Amazon SNS to be preconfigured.
 * View the command as it would appear if executed within the AWS Command Line Interface.
@@ -460,9 +460,9 @@ The remaining Run Command features enable you to:
    2. For **Error threshold**, ensure that **error** is selected and specify the value as `1`.
 1. Choose **Run** to execute the command and to go to its details page.
 1. Refresh the page to view updated status and proceed when the execution is successful.
+1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 
 >**Warning**<br>Remember, if any updates are installed by Patch Manager, the patched instance is rebooted.
-1. In the **Output options** clear the checkbox for 'Enable writing to an S3 bucket'
 
 ### 4.7 Review Patch Compliance After Patching
 
