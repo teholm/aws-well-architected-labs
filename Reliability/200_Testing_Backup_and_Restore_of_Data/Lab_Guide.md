@@ -180,13 +180,10 @@ For the purpose of this lab, we will simulate the action performed by AWS Backup
 
 ![restore-job-notification](Images/restore-job-notification.png)
 
-18. Once it is established that the restore was successful, it is time to delete the new resource that was created to prevent unnecessary spend. This process is also automated using AWS Lambda.
+18. Once it is established that the restore was successful, it would be time to delete the new resource that was created to prevent unnecessary spend, however this process was automated using AWS Lambda.
 19. Monitor your email to see if you have received a **Restore Test Status** notification confirming the deletion of the newly created resource. Check the EC2 Console to verify that the new EBS Volume has been deleted - <https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Volumes:sort=size>
-20. Use your administrator account to access the AWS CloudWatch console - <https://console.aws.amazon.com/cloudwatch/home?region=us-east-1>
-21. Click on **LOGS** from the menu on the left side.
-22. For filter, paste the following string.
-
- `/aws/lambda/RestoreTestFunction`
+20. Use your administrator account to access the AWS CloudWatch console. Click on **Log groups** from the menu on the left side. <https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logs:>
+21. Look for the Log group with the following string. `/aws/lambda/BackupFunction`
 
 23.  Click on the **LOG STREAM** and view the output of the Lambda function's execution.
 
@@ -201,11 +198,12 @@ For the purpose of this lab, we will simulate the action performed by AWS Backup
 ## 5. Lab Cleanup <a name="tear_down"></a>
 
 The following instructions will remove the resources that you have created in this lab.
+>**Note**<br> If this was a AWS sponsored event using Event Engine the cleanup steps below are not necessary.
 
 #### Cleaning up AWS Backup Resources
 
 1.  Sign in to the AWS Management Console and navigate to the AWS Backup console - <https://us-east-1.console.aws.amazon.com/backup/home?region=us-east-1#home>
-2.  Click on **BACKUP VAULTS** from the menu on the left side, and select **BACKUP-LAB-VAULT**.
+2.  Click on **BACKUP VAULTS** from the menu on the left side (If it is not visible on the left, click on the 3-horizontal bars in the upper left to expand the menu), and select **BACKUP-LAB-VAULT**.
 3.  Under the section **BACKUPS**, delete all the **RECOVERY POINTS**.
 4.  Once all the **RECOVERY POINTS** have been deleted, delete the **Backup Vault** by clicking on **DELETE** on the top right hand corner.
 5.  Click on **BACKUP PLANS** from the menu on the left side, and select **BACKUP-LAB**.
@@ -221,7 +219,7 @@ The following instructions will remove the resources that you have created in th
 
 1. Sign in to the AWS Management Console, and open the CloudWatch console at [https://console.aws.amazon.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/).
 2. Click **Logs** in the left navigation.
-3. Click the radio button on the left of the **/aws/lambda/RestoreTestFunction**.
+3. Click the radio button on the left of the **/aws/lambda/BackupFunction**.
 4. Click the **Actions Button** then click **Delete Log Group**.
 5. Verify the log group name then click **Yes, Delete**.
 
