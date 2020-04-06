@@ -20,6 +20,8 @@ For many organizations, the data that they possess is one of the most valuable a
 
 You will use AWS CloudFormation to provision some resources needed for this lab. As part of this lab, the CloudFormation stack that you provision will create an EBS Volume, an SNS Topic, and a Lambda Function. **This lab will only work in us-east-1.**
 
+**AUTOMATED SETUP**
+
 If you are using the new CloudFormation console, click [here](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateUrl=https%3A%2F%2Fc3pio.s3.amazonaws.com%2Fbackup-test%2Fbackup-lab.json&stackName=WA-BACKUP-LAB) to deploy the stack.
 
 If you are using the old CloudFormation console, click [here](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?filter=active&templateURL=https://c3pio.s3.amazonaws.com/backup-test/backup-lab.json&stackName=WA-BACKUP-LAB&param_TagKey=workload&param_TagValue=myapp) to deploy the stack.
