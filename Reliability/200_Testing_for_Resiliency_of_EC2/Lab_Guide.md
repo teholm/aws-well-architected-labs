@@ -13,7 +13,7 @@
 
 ## 1. Deploy the Infrastructure <a name="prerequisite"></a>
 
-It is a prerequisite to this lab is that you have deployed the static web application stack. If you have _already_ run the following two labs (and have not torn down the resources) then you have already deployed the necessary infrastructure. Proceed to next step **Configure Execution Environment**
+It is a prerequisite to this lab is that you have deployed the static web application stack. If you have _already_ run the two **Security** labs listed below (and have not torn down the resources) then you have already deployed the necessary infrastructure. Proceed to next step **Configure Execution Environment**
 
 * [Security: Level 200: Automated Deployment of VPC](../../Security/200_Automated_Deployment_of_VPC/Lab_Guide.md)
 * [Security: Level 200: Automated Deployment of EC2 Web Application](../../Security/200_Automated_Deployment_of_EC2_Web_Application/Lab_Guide.md)
@@ -262,7 +262,7 @@ Refresh the service website several times. Note the following:
 Load balancing ensures service requests are not routed to unhealthy resources, such as the failed EC2 instance.
 
 1. Go to the **Target Groups** console you already have open (or [click here to open a new one](http://console.aws.amazon.com/ec2/v2/home?#TargetGroups:))
-     * If there is more than one target group, select the one with whose name begins with  **WebAp**
+     * If there is more than one target group, select the one with whose name begins with  **WebApp**
 
 1. Click on the **Targets** tab and observe:
       * Status of the instances in the group. The load balancer will only send traffic to healthy instances.

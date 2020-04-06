@@ -1,5 +1,5 @@
 # Level 200: Testing for Resiliency of EC2
-https://wellarchitectedlabs.com 
+https://wellarchitectedlabs.com
 
 ## Introduction
 
@@ -9,7 +9,7 @@ It is not sufficient to only design for failure, you must also test to ensure th
 
 In this lab, you will deploy a 2-tier resource, with a reverse proxy (Application Load Balancer), and Web Application on Amazon Elastic Compute Cloud (EC2).
 
-The skills you learn will help you build resilient workloads in alignment with the [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) 
+The skills you learn will help you build resilient workloads in alignment with the [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
 
 ## Goals:
 
@@ -21,12 +21,12 @@ The skills you learn will help you build resilient workloads in alignment with t
 
 ## Prequisites:
 
-* An 
-[AWS Account](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html) that you are able to use for tesintg, that is not used for production or other purposes.
-* An Identity and Access Management (IAM) user or federated credentials into that account that has permissions to create Amazon Virtual Private Cloud(s) (VPCs), including subnets, security groups, internet gateways, NAT Gateways, Elastic IP Addresses, and route tables. The credentials must also be able to create the database subnet group needed for a Multi-AZ RDS instance. The credential will need permissions to create IAM Role, instance profiles, AWS Auto Scaling lanch configurations, application load balancers, auto scaling group, and EC2 instances.
+* An
+[AWS Account](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html) that you are able to use for testing, that is not used for production or other purposes.
+* An Identity and Access Management (IAM) user or federated credentials into that account that has permissions to create Amazon Virtual Private Cloud(s) (VPCs), including subnets, security groups, internet gateways, NAT Gateways, Elastic IP Addresses, and route tables. The credentials must also be able to create the database subnet group needed for a Multi-AZ RDS instance. The credential will need permissions to create IAM Role, instance profiles, AWS Auto Scaling launch configurations, application load balancers, auto scaling group, and EC2 instances.
 * An IAM user or federated credentials into that account that has permissions to deploy the deployment automation, which consists of IAM service linked roles, AWS Lambda functions, and an AWS Step Functions state machine to execute the deployment.
 
-NOTE: You will be billed for any applicable AWS resources used if you complete this lab that are not covered in the 
+NOTE: You will be billed for any applicable AWS resources used if you complete this lab that are not covered in the
 [AWS Free Tier](https://aws.amazon.com/free/).
 
 
@@ -46,7 +46,7 @@ NOTE: You will be billed for any applicable AWS resources used if you complete t
 
 Licensed under the [Creative Commons Share Alike 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
 
-### Code LicenseLicensed under the Apache 2.0 and MITnoAttr License. 
+### Code LicenseLicensed under the Apache 2.0 and MITnoAttr License.
 
 Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
@@ -55,4 +55,3 @@ Licensed under the Apache License, Version 2.0 (the "License"). You may not use 
     https://aws.amazon.com/apache2.0/
 
 or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-
