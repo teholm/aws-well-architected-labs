@@ -15,7 +15,7 @@ Included in the lab guide are bonus sections that can be completed if you have t
 
 >**Important**
 You will be billed for any applicable AWS resources used in this lab that are not covered in the [AWS Free Tier](https://aws.amazon.com/free/). At the end of the lab guide there is an additional section on how to remove all the resources you have created.
-* Removing Lab Resources
+* [Removing Lab Resources](#7)
 
 
 # 1. Setup
@@ -475,7 +475,7 @@ In a traditional environment, you would have had to set up the systems and softw
 _Operations as code_ reduces the resources, time, risk, and complexity of performing operations tasks and ensures consistent execution. You can take operations as code and automate operations activities by using scheduling and event triggers. Through integration at the infrastructure level you avoid "swivel chair" processes that require multiple interfaces and systems to complete a single operations activity.
 
 
-# Bonus Content: Creating Maintenance Windows and Scheduling Automated Operations Activities
+# 5. Bonus Content: Creating Maintenance Windows and Scheduling Automated Operations Activities
 
 
 ## AWS Systems Manager: Maintenance Windows
@@ -510,7 +510,7 @@ _Operations as code_ reduces the resources, time, risk, and complexity of perfor
    1. Choose the **Trust relationships** tab.
    1. Choose **Edit trust relationship**.
    1. Delete the current policy, and then copy and paste the following policy into the **Policy Document** field:
-```
+```json
 {
    "Version":"2012-10-17",
    "Statement":[
@@ -642,7 +642,7 @@ After you assign targets, you [assign tasks](https://docs.aws.amazon.com/systems
 
 You have now configured a maintenance window, assigned targets, assigned tasks, and validated successful execution. The same procedures can be used to schedule the execution of any [AWS Systems Manager Document](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html).
 
-# Bonus Content: Creating a Simple Notification Service Topic
+# 6. Bonus Content: Creating a Simple Notification Service Topic
 
 [Amazon Simple Notification Service](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) (Amazon SNS) coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. In Amazon SNS, there are two types of clients: publishers and subscribers. These are also referred to as producers and consumers. Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel. Subscribers (i.e., web servers, email addresses, Amazon SQS queues, AWS Lambda functions) consume or receive the message or notification over one of the supported protocols (i.e., Amazon SQS, HTTP/S, email, SMS, Lambda) when they are subscribed to the topic.
 
@@ -667,7 +667,7 @@ To create and subscribe to an SNS topic:
 You can now use this SNS topic to send notifications to your Administrator user.
 
 
-# 7 Removing Lab Resources
+# 7. Removing Lab Resources
 
 > **Note**<br>When the lab is complete, remove the resources you created. Otherwise you will be charged for any resources that are not covered in the AWS Free Tier.
 
