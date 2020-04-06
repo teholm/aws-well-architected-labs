@@ -38,10 +38,6 @@ You will create a multi-tier architecture using AWS and run a simple service on 
 
 You will deploy the service infrastructure including simple service code and some sample data.
 
-1. It is recommended that you use the **Ohio** region.  This region is also known as **us-east-2**, which you will see referenced throughout this lab.
-![SelectOhio](Images/SelectOhio.png)
-      * If you choose to use a different region, you will need to ensure future steps are consistent with your region choice.
-
 #### 1.2.1 Deploy the VPC infrastructure
 
 * If you are comfortable deploying a CloudFormation stack, then use the **express steps** listed immediately below.
@@ -111,7 +107,7 @@ Wait until the VPC CloudFormation stack **status** is _CREATE_COMPLETE_, then co
 
 1. You already observed that all three EC2 instances are successfully serving requests
 1. In a new tab navigate to ELB Target Groups console
-      * By [clicking here to open the AWS Management Console](http://console.aws.amazon.com/ec2/v2/home?region=us-east-2#TargetGroups:)
+      * By [clicking here to open the AWS Management Console](https://console.aws.amazon.com/ec2/v2/home#TargetGroups:)
       * _or_ navigating through the AWS Management Console: **Services** > **EC2** > **Load Balancing** > **Target Groups**
       * Leave this tab open as you will be referring back to it multiple times
 1. Click on the **Targets** tab (bottom half of screen)
@@ -145,7 +141,7 @@ The **RecommendationServiceEnabled** parameter is used only for this lab. The se
       * Note that it fails with _502 Bad Gateway_
       * For each request one of the servers receiving the request attempts to call the **RecommendationService** but catastrophically fails and fails to return a reply (empty reply) to the load balancer, which in turn presents this as a http 502 failure.
 1. You can observe this by opening a new tab and navigating to ELB Load Balancers console:
-      * By [clicking here to open the AWS Management Console](http://console.aws.amazon.com/ec2/v2/home?region=us-east-2#LoadBalancers:)
+      * By [clicking here to open the AWS Management Console](https://console.aws.amazon.com/ec2/v2/home#LoadBalancers:)
       * _or_ navigating through the AWS Management Console: **Services** > **EC2** > **Load Balancing** > **Load Balancers**
 1. Click on the **Monitoring** tab (bottom half of screen)
       * Observe the **ELB 5XXs (Count)** and **HTTP 502s (Count)** errors for the load balancer
@@ -209,7 +205,7 @@ If you completed the **Expert option**, then skip the **Assisted option** sectio
 1. Leave **Use current template** selected and click **Next**
 1. Find the **ServerCodeUrl** parameter and enter the following:
 
-        https://aws-well-architected-labs-ohio.s3.us-east-2.amazonaws.com/Healthcheck/Code/server_errorhandling.py
+        https://aws-well-architected-labs-ohio.s3.us-east-1.amazonaws.com/Healthcheck/Code/server_errorhandling.py
 
 1. Click **Next** until the last page
 1. At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources with custom names**
@@ -286,10 +282,10 @@ For the next part of the lab restore access to the **getRecommendation** API on 
 
 Previously you simulated a failure of the service dependency. Now you will simulate a failure on a single server (of the three servers running). You will simulate a fault on this server that prevents only it from calling the otherwise healthy service dependency.
 
-1. Navigate to the [EC2 Instances console](https://console.aws.amazon.com/ec2/v2/home?LoadBalancers:&region=us-east-2#Instances:)
+1. Navigate to the [EC2 Instances console](https://console.aws.amazon.com/ec2/v2/home?LoadBalancers:&region=us-east-1#Instances:)
       * There should be three EC2 instances with **Instance State** _running_, one in each Availability Zone (they will have **Name** _WebApp1_)
       * Click the gear icon in the upper-right and select **IAM Instance Profile Name** (in addition to what is already selected)
-1. Select only the EC2 instance in **Availability Zone** _us-east-2c_
+1. Select only the EC2 instance in **Availability Zone** _us-east-1c_
 1. Click **Action** > **Instance Settings** > **Attach/Replace IAM Role**
 1. From **IAM role**, click **WebApp1-EC2-noDDB-Role-HealthCheckLab**
 
@@ -299,20 +295,20 @@ Previously you simulated a failure of the service dependency. Now you will simul
 1. Click **Close**
 1. This will return you to the EC2 Instances console. Observe under **IAM Instance Profile Name** (it is one of the displayed columns) which IAM roles each EC2 instance has attached
 
-The IAM role attached to an EC2 instance determines what permissions it has to access AWS resources. You changed the role of the us-east-2c instance to one that is almost the same as the other two, except it does not have access to DynamoDB. Since DynamoDB is used to mock our service dependency, the us-east-2c server no longer has access to the service dependency (**RecommendationService**). Stale credentials is an actual fault that servers might experience. Your actions above simulate stale (invalid) credentials on the us-east-2c server.
+The IAM role attached to an EC2 instance determines what permissions it has to access AWS resources. You changed the role of the us-east-1c instance to one that is almost the same as the other two, except it does not have access to DynamoDB. Since DynamoDB is used to mock our service dependency, the us-east-1c server no longer has access to the service dependency (**RecommendationService**). Stale credentials is an actual fault that servers might experience. Your actions above simulate stale (invalid) credentials on the us-east-1c server.
 
 ### 3.4 Observe application behavior and determine how to fix it
 
 * Observe the website behavior now
     * Refresh the website multiple times noting which Availability Zone the serving the request
-    * The servers in us-east-2a and us-east-2b continue to function normally
-    * The server in us-east-2c still succeeds, but it uses the static response. Why is this?
+    * The servers in us-east-1a and us-east-1b continue to function normally
+    * The server in us-east-1c still succeeds, but it uses the static response. Why is this?
 * The service dependency (**RecommendationServiceEnabled**) is still healthy
-* It is the server in us-east-2c that is unhealthy - it has stale credentials
+* It is the server in us-east-1c that is unhealthy - it has stale credentials
     * Return to the **Target Groups** and under the **Targets** tab observe the results of the ELB health checks
-    * They are all **Status** _healthy_, and are therefore all receiving traffic. Why does the server in us-east-2c show _healthy_ for this check?
+    * They are all **Status** _healthy_, and are therefore all receiving traffic. Why does the server in us-east-1c show _healthy_ for this check?
 * The service would deliver a _better experience_ if it:
-    * Identified the us-east-2c server as unhealthy and did not route traffic to it
+    * Identified the us-east-1c server as unhealthy and did not route traffic to it
     * Replaced this server with a healthy one
 
     |Well-Architected for Reliability: Recovery-Oriented Computing (ROC)|
@@ -368,7 +364,7 @@ If you completed the **Expert option**, then skip the **Assisted option** sectio
 1. Leave **Use current template** selected and click **Next**
 1. Find the **ServerCodeUrl** parameter and enter the following:
 
-        https://aws-well-architected-labs-ohio.s3.us-east-2.amazonaws.com/Healthcheck/Code/server_healthcheck.py
+        https://aws-well-architected-labs-ohio.s3.us-east-1.amazonaws.com/Healthcheck/Code/server_healthcheck.py
 
 1. Click **Next** until the last page
 1. At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources with custom names**
@@ -469,18 +465,18 @@ The CloudFormation stack update reset the EC2 instance IAM roles, so the system 
       * Refresh several times and observe the health check on the three servers
       * Note the check is successful
       * Go to the **Target Groups** console click on the **Targets** tab and note the health status as per the ELB health checks.
-1. To re-introduce the stale credentials fault, again change the IAM role for the EC2 instance in us-east-2c to **WebApp1-EC2-noDDB-Role-HealthCheckLab**
+1. To re-introduce the stale credentials fault, again change the IAM role for the EC2 instance in us-east-1c to **WebApp1-EC2-noDDB-Role-HealthCheckLab**
       * See [3.2 Inject fault on one of the servers](#change_role) if you need a reminder of how to do this.
 1. Go to the **Target Groups** console click on the **Targets** tab and note the health status as per the ELB health checks (remember to refresh)
-      * Note that the server in us-east-2c is now failing the health check with a http code 503 Service Not Available
-      * The ELB has identified the us-east-2c server as unhealthy and will not route traffic to it
+      * Note that the server in us-east-1c is now failing the health check with a http code 503 Service Not Available
+      * The ELB has identified the us-east-1c server as unhealthy and will not route traffic to it
       * This is known as _fail-closed_ behavior
 
           ![OneUnhealthy503](Images/OneUnhealthy503.png)
 
 1. Refresh the web service multiple times and note it is however still functioning without error
       * And unlike before it is no longer returning a static response - it only returns personalized recommendations
-      * Note that only the servers in us-east-2a and us-east-2b are serving requests
+      * Note that only the servers in us-east-1a and us-east-1b are serving requests
 
     |Well-Architected for Reliability: Best practices|
     |:--:|
@@ -493,14 +489,14 @@ The CloudFormation stack update reset the EC2 instance IAM roles, so the system 
 
 ##### Repair the server
 
-1. Navigate to the EC2 Instances console and select only the instance in us-east-2c
+1. Navigate to the EC2 Instances console and select only the instance in us-east-1c
 1. Click **Action** > **Instance State** > **Terminate**
 1. Click **Yes, Terminate**
       * The EC2 instance will shut down
       * Amazon EC2 Auto Scaling will recognize there are less then the three Desired Capacity and will start up a new EC2 instance
       * The new instance replaces the one with the stale credentials fault, and loads fresh credentials
-1. From the **Target Groups** console **Targets** tab note the health check status of the new server in us-east-2c
-      * The new instance in us-east-2c will first show **Description** _Target registration is in progress_
+1. From the **Target Groups** console **Targets** tab note the health check status of the new server in us-east-1c
+      * The new instance in us-east-1c will first show **Description** _Target registration is in progress_
       * Then **Description** is _This target is currently passing target group's health checks_, then you may continue the workshop
       * (The **Description** may show _Health checks failed with these codes: [502]_, before getting to a healthy state. This is expected as the server initializes)
       * From the time you terminate the EC2 instance, it will take four to five minutes to get the new EC2 instance up and in a healthy state
