@@ -123,7 +123,7 @@ Wait until the VPC CloudFormation stack **status** is _CREATE_COMPLETE_, then co
 
 You will now simulate a complete failure of the **RecommendationService**. Every request in turn makes a (simulated) call to the **getRecommendation** API on this service. These will all fail for every request on every server.
 
-1. In a new tab, navigate to the Parameter Store on the AWS Systems Manager console
+1. In a new browser tab, navigate to the **AWS Systems Manager** service, then select **Parameter Store**
       * By [clicking here to open the AWS Management Console](https://console.aws.amazon.com/systems-manager/parameters)
       * _or_ navigating through the AWS Management Console: **Services** > **Systems Manager** > **Parameter Store**
       * Leave this tab open as you will be referring back to it one additional time
@@ -205,7 +205,7 @@ If you completed the **Expert option**, then skip the **Assisted option** sectio
 1. Leave **Use current template** selected and click **Next**
 1. Find the **ServerCodeUrl** parameter and enter the following:
 
-        https://aws-well-architected-labs-ohio.s3.us-east-1.amazonaws.com/Healthcheck/Code/server_errorhandling.py
+        https://aws-well-architected-labs-ohio.s3.us-east-2.amazonaws.com/Healthcheck/Code/server_errorhandling.py
 
 1. Click **Next** until the last page
 1. At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources with custom names**
