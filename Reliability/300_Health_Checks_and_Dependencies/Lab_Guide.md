@@ -364,7 +364,7 @@ If you completed the **Expert option**, then skip the **Assisted option** sectio
 1. Leave **Use current template** selected and click **Next**
 1. Find the **ServerCodeUrl** parameter and enter the following:
 
-        https://aws-well-architected-labs-ohio.s3.us-east-1.amazonaws.com/Healthcheck/Code/server_healthcheck.py
+        https://aws-well-architected-labs-ohio.s3.us-east-2.amazonaws.com/Healthcheck/Code/server_healthcheck.py
 
 1. Click **Next** until the last page
 1. At the bottom of the page, select **I acknowledge that AWS CloudFormation might create IAM resources with custom names**
